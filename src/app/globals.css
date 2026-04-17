@@ -1,0 +1,69 @@
+@import "tailwindcss";
+
+:root {
+  --cream:    #F4EFE6;
+  --cream-2:  #EDE6D8;
+  --green:    #2B4235;
+  --green-lt: #3D5C4A;
+  --wine:     #6B2537;
+  --wine-lt:  #8A3047;
+  --gold:     #B8923A;
+  --ink:      #1A1310;
+  --muted:    #6B5E54;
+  --border:   rgba(43,66,53,0.18);
+  /* Fonts will be provided via CSS variables from next/font */
+  --ff-display: var(--font-cormorant), Georgia, serif;
+  --ff-label:   var(--font-cinzel), serif;
+  --ff-body:    var(--font-dm-sans), sans-serif;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--cream);
+  color: var(--ink);
+  font-family: var(--ff-body);
+  font-size: 16px;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* ── Noise texture overlay ─────────────────────── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.6;
+}
+
+/* ── Typography ─────────────────────────────────── */
+h1, h2, h3, h4 { 
+  font-family: var(--ff-display); 
+  font-weight: 300; 
+  line-height: 1.1; 
+}
+
+.label {
+  font-family: var(--ff-label);
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+/* + WCAG-compliant focus ring */
+*:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 2px;
+}
