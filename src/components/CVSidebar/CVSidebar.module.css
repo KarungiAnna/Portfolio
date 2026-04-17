@@ -1,0 +1,77 @@
+.cvSidebar {
+  background: var(--cream-2);
+  padding: 2.5rem 1.8rem;
+  border-right: 1px solid var(--border);
+}
+
+.skillTagList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.skillTag {
+  font-size: 0.8rem;
+  color: var(--ink);
+  padding: 0.35rem 0;
+  border-bottom: 1px solid var(--border);
+  font-weight: 300;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.skillTag::before {
+  content: '';
+  width: 4px;
+  height: 4px;
+  background: var(--wine);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.eduItem {
+  margin-bottom: 1.2rem;
+}
+
+.eduDegree {
+  font-family: var(--ff-display);
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.3;
+}
+
+.eduSchool {
+  font-size: 0.78rem;
+  color: var(--muted);
+  margin-top: 0.15rem;
+}
+
+.eduYear {
+  font-family: var(--ff-label);
+  font-size: 0.5rem;
+  letter-spacing: 0.15em;
+  color: var(--wine);
+  text-transform: uppercase;
+  margin-top: 0.25rem;
+}
+
+.strengthItem {
+  margin-bottom: 1rem;
+}
+
+.strengthName {
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 0.15rem;
+}
+
+.strengthProof {
+  font-size: 0.73rem;
+  color: var(--muted);
+  line-height: 1.5;
+  font-weight: 300;
+  font-style: italic;
+}
