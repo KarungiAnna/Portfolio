@@ -20,11 +20,8 @@ export default function CVPage() {
   return (
     <div className={styles.cvWrapper}>
       <div className={styles.cvActions}>
-        {/* We'll use window.print() but wrap it in an interactive client component? Wait, we can't use onClick in Server Component. */}
-        {/* So I will decouple the print button to a small client component if needed, or simply render a classic button block. */}
-        {/* For Next.js Server Components, we can just use an anchor pointing to the PDF or a client wrapper. */}
         <a href="/api/cv/pdf" target="_blank" rel="noreferrer" className={styles.actionBtn}>
-          ⎙ Print / Save PDF
+          ⎙ Download PDF
         </a>
         <Link href="/" className={styles.actionBtnSecondary}>
           ← Back to Portfolio

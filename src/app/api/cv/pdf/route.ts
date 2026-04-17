@@ -1,18 +1,36 @@
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
+import React from 'react';
 import { NextResponse } from 'next/server';
-import { readFile } from 'fs/promises';
-import path from 'path';
+import { renderToStream } from '@react-pdf/renderer';
+import { CVPDF } from '@/components/CVPDF/CVPDF';
+import { getAllExperiences } from '@/db/queries';
 
 export async function GET() {
   try {
-    const filePath = path.join(process.cwd(), 'public', 'cv.pdf');
-    const file = await readFile(filePath);
-    return new NextResponse(file, {
+    const experiences = await getAllExperiences();
+    
+    // React-PDF renders to a Node.js Readable stream
+    const nodeStream = await renderToStream(React.createElement(CVPDF, { experiences }) as any);
+    
+    // Polyfill conversion from Node Stream to Web ReadableStream for Next.js App Router
+    const webStream = new ReadableStream({
+      start(controller) {
+        nodeStream.on('data', (chunk) => controller.enqueue(chunk));
+        nodeStream.on('end', () => controller.close());
+        nodeStream.on('error', (err) => controller.error(err));
+      }
+    });
+
+    return new NextResponse(webStream, {
       headers: {
         'Content-Type': 'application/pdf',
         'Content-Disposition': 'attachment; filename="karungi-anna-cv.pdf"',
       },
     });
   } catch (error) {
-    return new NextResponse('PDF Not Found', { status: 404 });
+    console.error('PDF Generation Error:', error);
+    return new NextResponse('Internal Error dynamically generating PDF', { status: 500 });
   }
 }
