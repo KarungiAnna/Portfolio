@@ -1,6 +1,7 @@
 import styles from './ContactSection.module.css';
 import sectionStyles from '../Section.module.css';
 import FadeIn from '../FadeIn/FadeIn';
+import ContactForm from '../ContactForm/ContactForm';
 
 export default function ContactSection() {
   return (
@@ -51,32 +52,7 @@ export default function ContactSection() {
         </FadeIn>
 
         <FadeIn className={styles.contactFormBlock} delay={0.1}>
-          {/* Form UI - will be made functional in Commit 5 */}
-          <form className={styles.contactForm}>
-            <div className={styles.formRow}>
-              <div className={styles.formGroup}>
-                <label htmlFor="firstName">First Name</label>
-                <input id="firstName" name="firstName" type="text" placeholder="John" />
-              </div>
-              <div className={styles.formGroup}>
-                <label htmlFor="lastName">Last Name</label>
-                <input id="lastName" name="lastName" type="text" placeholder="Doe" />
-              </div>
-            </div>
-            <div className={styles.formGroup}>
-              <label htmlFor="email">Email Address</label>
-              <input id="email" name="email" type="email" placeholder="john@example.com" />
-            </div>
-            <div className={styles.formGroup}>
-              <label htmlFor="subject">Subject</label>
-              <input id="subject" name="subject" type="text" placeholder="Project Inquiry / Collaboration" />
-            </div>
-            <div className={styles.formGroup}>
-              <label htmlFor="message">Message</label>
-              <textarea id="message" name="message" rows={5} placeholder="Tell me about your project or opportunity…"></textarea>
-            </div>
-            <button type="button" className={styles.btnSend}>Send Message →</button>
-          </form>
+          <ContactForm />
         </FadeIn>
       </div>
     </section>
