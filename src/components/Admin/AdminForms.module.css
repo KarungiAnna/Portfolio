@@ -1,0 +1,125 @@
+.adminForm {
+  background: var(--cream-2);
+  padding: 2rem;
+  border: 1px solid var(--border);
+}
+
+.formGroup {
+  margin-bottom: 1.2rem;
+}
+
+.formGroup label {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--ff-label);
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
+  color: var(--muted);
+  text-transform: uppercase;
+  margin-bottom: 0.4rem;
+}
+
+.formGroup input,
+.formGroup textarea {
+  width: 100%;
+  padding: 0.7rem;
+  background: var(--cream);
+  border: 1px solid var(--border);
+  font-family: var(--ff-body);
+  color: var(--ink);
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color 0.2s ease;
+  resize: vertical;
+}
+
+.formGroup input:focus,
+.formGroup textarea:focus {
+  border-color: var(--green);
+}
+
+.errorText {
+  color: var(--wine);
+  font-size: 0.75rem;
+  margin-top: 0.3rem;
+  display: block;
+}
+
+.btnSubmit {
+  width: 100%;
+  background: var(--green);
+  color: var(--cream);
+  border: none;
+  padding: 0.8rem;
+  font-family: var(--ff-label);
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+}
+
+.btnSubmit:hover:not(:disabled) {
+  background: var(--green-lt);
+}
+
+.btnSubmit:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.arrayHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.8rem;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0.4rem;
+}
+
+.arrayTitle {
+  font-family: var(--ff-label);
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+.btnAddItem {
+  background: transparent;
+  border: 1px solid var(--green);
+  color: var(--green);
+  padding: 0.2rem 0.6rem;
+  font-size: 0.6rem;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-family: var(--ff-label);
+}
+
+.btnAddItem:hover {
+  background: var(--green);
+  color: var(--cream);
+}
+
+.arrayItem {
+  display: flex;
+  gap: 0.5rem;
+  align-items: flex-start;
+  margin-bottom: 0.8rem;
+}
+
+.btnRemoveItem {
+  background: transparent;
+  color: var(--wine);
+  border: 1px solid var(--wine);
+  padding: 0.55rem;
+  font-size: 0.7rem;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.btnRemoveItem:hover {
+  background: var(--wine);
+  color: var(--cream);
+}
