@@ -8,21 +8,20 @@ export default function CVSidebar() {
         <h3 className={sharedStyles.cvSectionTitle}>Skills</h3>
         <ul className={styles.skillTagList}>
           <li className={styles.skillTag}>React / Next.js</li>
-          <li className={styles.skillTag}>Vue.js / Nuxt</li>
+          <li className={styles.skillTag}>JavaScript</li>
           <li className={styles.skillTag}>TypeScript</li>
-          <li className={styles.skillTag}>Node.js / Express</li>
-          <li className={styles.skillTag}>Python / Django</li>
-          <li className={styles.skillTag}>PostgreSQL / MySQL</li>
-          <li className={styles.skillTag}>MongoDB / Redis</li>
-          <li className={styles.skillTag}>REST &amp; GraphQL APIs</li>
-          <li className={styles.skillTag}>React Native</li>
-          <li className={styles.skillTag}>Docker / Kubernetes</li>
-          <li className={styles.skillTag}>AWS / GCP</li>
-          <li className={styles.skillTag}>CI/CD Pipelines</li>
+          <li className={styles.skillTag}>Tailwind CSS</li>
           <li className={styles.skillTag}>Figma / UI Design</li>
+          <li className={styles.skillTag}>Django REST Framework</li>
+          <li className={styles.skillTag}>Python</li>
+          <li className={styles.skillTag}>Node.js / Express</li>
+          <li className={styles.skillTag}>REST APIs</li>
+          <li className={styles.skillTag}>PostgreSQL / Neon</li>
+          <li className={styles.skillTag}>MongoDB</li>
+          <li className={styles.skillTag}>Docker</li>
+          <li className={styles.skillTag}>CI/CD Pipelines</li>
           <li className={styles.skillTag}>Git / GitHub</li>
           <li className={styles.skillTag}>Agile / Scrum</li>
-          <li className={styles.skillTag}>Linux / Bash</li>
         </ul>
       </div>
 

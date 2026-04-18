@@ -22,34 +22,31 @@ export default function SkillsSection() {
             <p className={styles.skillCategoryTitle}>Frontend</p>
             <ul className={styles.skillList}>
               <li className={styles.skillItem}>React / Next.js</li>
-              <li className={styles.skillItem}>Vue.js / Nuxt</li>
+              <li className={styles.skillItem}>JavaScript</li>
               <li className={styles.skillItem}>TypeScript</li>
               <li className={styles.skillItem}>Tailwind CSS</li>
               <li className={styles.skillItem}>Figma / UI Design</li>
-              <li className={styles.skillItem}>React Native</li>
             </ul>
           </FadeIn>
           
           <FadeIn delay={0.1}>
             <p className={styles.skillCategoryTitle}>Backend</p>
             <ul className={styles.skillList}>
+              <li className={styles.skillItem}>Django REST Framework</li>
+              <li className={styles.skillItem}>Python</li>
               <li className={styles.skillItem}>Node.js / Express</li>
-              <li className={styles.skillItem}>React / Django</li>
-              <li className={styles.skillItem}>REST &amp; GraphQL APIs</li>
-              <li className={styles.skillItem}>PostgreSQL / MySQL</li>
-              <li className={styles.skillItem}>MongoDB / Redis</li>
-              <li className={styles.skillItem}>Microservices</li>
+              <li className={styles.skillItem}>REST APIs</li>
+              <li className={styles.skillItem}>PostgreSQL / Neon</li>
+              <li className={styles.skillItem}>MongoDB</li>
             </ul>
           </FadeIn>
           
           <FadeIn delay={0.2}>
             <p className={styles.skillCategoryTitle}>Tools &amp; Cloud</p>
             <ul className={styles.skillList}>
-              <li className={styles.skillItem}>AWS / GCP</li>
-              <li className={styles.skillItem}>Docker / Kubernetes</li>
+              <li className={styles.skillItem}>Docker</li>
               <li className={styles.skillItem}>CI/CD Pipelines</li>
               <li className={styles.skillItem}>Git / GitHub</li>
-              <li className={styles.skillItem}>Linux / Bash</li>
               <li className={styles.skillItem}>Agile / Scrum</li>
             </ul>
           </FadeIn>

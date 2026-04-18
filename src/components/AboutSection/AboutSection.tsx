@@ -1,6 +1,7 @@
 import styles from './AboutSection.module.css';
 import sectionStyles from '../Section.module.css';
 import FadeIn from '../FadeIn/FadeIn';
+import Image from 'next/image';
 
 export default function AboutSection() {
   return (
@@ -8,8 +9,8 @@ export default function AboutSection() {
       <div className={sectionStyles.sectionHeader}>
         <div>
           <p className="label" style={{ marginBottom: '0.8rem', color: 'rgba(244,239,230,0.5)' }}>Who I Am</p>
-          <h2 id="about-heading" className={`${sectionStyles.sectionHeading} ${styles.heading}`}>
-            A little bit<br /><em>about me</em>
+          <h2 id="about-heading" className={`${sectionStyles.sectionHeading} ${styles.heading}`} style={{ color: '#8A3047' }}>
+            About me
           </h2>
         </div>
       </div>
@@ -17,14 +18,11 @@ export default function AboutSection() {
       <div className={styles.aboutGrid}>
         <div className={styles.aboutImageWrap}>
           <div className={styles.aboutPlaceholder} style={{ position: 'relative' }}>
-            <div className={styles.aboutPlaceholderIcon}>
-              <svg width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="0.8">
-                <rect x="3" y="3" width="18" height="18" rx="2" />
-                <circle cx="8.5" cy="8.5" r="1.5" />
-                <path d="M20.4 14.5L16 10 4 20" />
-              </svg>
-            </div>
-            <span>Image Placeholder</span>
+            <img 
+              src="/Profile.png" 
+              alt="Karungi Anna" 
+              style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top', display: 'block' }} 
+            />
           </div>
         </div>
 

@@ -27,6 +27,9 @@ export async function GET() {
       headers: {
         'Content-Type': 'application/pdf',
         'Content-Disposition': 'attachment; filename="karungi-anna-cv.pdf"',
+        'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
+        'Pragma': 'no-cache',
+        'Expires': '0',
       },
     });
   } catch (error) {

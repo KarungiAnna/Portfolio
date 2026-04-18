@@ -22,10 +22,17 @@ export default function Nav() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const renderLink = (hash: string, text: string) => {
+    if (pathname === '/') {
+      return <a href={hash} onClick={() => setMenuOpen(false)}>{text}</a>;
+    }
+    return <Link href={`/${hash}`} onClick={() => setMenuOpen(false)}>{text}</Link>;
+  };
+
   return (
     <nav className={`${styles.nav} ${scrolled ? styles.scrolled : ''}`} aria-label="Main navigation">
-      <Link href="/" className={styles.navLogo} aria-label="Lorem Ipsum Home">
-        LI.
+      <Link href="/" className={styles.navLogo} aria-label="Anna Home">
+        Anna.
       </Link>
 
       {/* Hamburger for mobile could be added here */}
@@ -42,9 +49,10 @@ export default function Nav() {
       
       <div className={`${styles.navContent} ${menuOpen ? styles.open : ''}`}>
         <ul className={styles.navLinks}>
-          <li><Link href={pathname === '/' ? '#about' : '/#about'} onClick={() => setMenuOpen(false)}>About</Link></li>
-          <li><Link href={pathname === '/' ? '#projects' : '/#projects'} onClick={() => setMenuOpen(false)}>Work</Link></li>
-          <li><Link href="/cv" onClick={() => setMenuOpen(false)}>CV</Link></li>
+          <li>{renderLink('#about', 'About')}</li>
+          <li>{renderLink('#projects', 'Work')}</li>
+          <li>{renderLink('#skills', 'Stack')}</li>
+          <li>{renderLink('#contact', 'Contact')}</li>
         </ul>
         
         <div className={styles.navBadge}>

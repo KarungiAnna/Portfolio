@@ -28,6 +28,12 @@
   );
   pointer-events: none;
   filter: blur(18px);
+  animation: driftGlow 8s ease-in-out infinite alternate;
+}
+
+@keyframes driftGlow {
+  0% { transform: translateX(calc(-50% - 30px)); }
+  100% { transform: translateX(calc(-50% + 30px)); }
 }
 
 .hero::before {
@@ -105,6 +111,17 @@
   margin-top: 1.6rem;
   margin-bottom: 0.7rem;
   animation: fadeUp 1s 0.3s ease both;
+}
+
+.heroLocation {
+  font-size: 0.85rem;
+  color: rgba(244, 239, 230, 0.4);
+  font-weight: 300;
+  margin-bottom: 2rem;
+  animation: fadeUp 1s 0.4s ease both;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .heroCtas {

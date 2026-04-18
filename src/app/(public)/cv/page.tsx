@@ -20,7 +20,7 @@ export default function CVPage() {
   return (
     <div className={styles.cvWrapper}>
       <div className={styles.cvActions}>
-        <a href="/api/cv/pdf" target="_blank" rel="noreferrer" className={styles.actionBtn}>
+        <a href="/api/cv/pdf" download="karungi-anna-cv.pdf" className={styles.actionBtn}>
           ⎙ Download PDF
         </a>
         <Link href="/" className={styles.actionBtnSecondary}>

@@ -21,68 +21,38 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     padding: '40px 40px',
   },
-  photoBox: {
-    width: 90,
-    height: 90,
-    border: `1px solid ${P_GOLD}`,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginRight: 30,
-  },
-  photoText: {
-    fontSize: 8,
-    color: '#898681',
-    textTransform: 'uppercase',
-    letterSpacing: 1,
-  },
-  headerMain: {
-    flex: 1,
-    position: 'relative',
+  headerLeftCol: {
+    flexDirection: 'column',
     justifyContent: 'center',
   },
-  headerTaglineTop: {
-    fontFamily: 'Helvetica-Bold',
-    fontSize: 8,
-    letterSpacing: 1.5,
-    color: P_GOLD,
-    textTransform: 'uppercase',
-    marginBottom: 10,
+  headerRightCol: {
+    flexDirection: 'column',
+    alignItems: 'flex-end',
+    justifyContent: 'center',
   },
-  headerTitle: {
-    fontSize: 32,
+  headerName: {
+    fontSize: 28,
     fontFamily: 'Times-Roman',
     color: P_CREAM,
-    marginBottom: 12,
-  },
-  headerSubtitle: {
-    fontSize: 10,
-    color: P_CREAM,
-    lineHeight: 1.5,
-    maxWidth: '70%',
-    marginBottom: 16,
-  },
-  headerContactCol: {
-    position: 'absolute',
-    right: 0,
-    top: 5,
-    alignItems: 'flex-end',
-  },
-  contactItem: {
-    fontSize: 8,
-    color: P_CREAM,
-    marginBottom: 5,
-  },
-  pillRow: {
-    flexDirection: 'row',
-    gap: 8,
-  },
-  pill: {
-    border: `1px solid ${P_GREEN_LT}`,
-    padding: '4px 8px',
-    fontSize: 7,
-    color: P_GOLD,
-    textTransform: 'uppercase',
+    marginBottom: 8,
     letterSpacing: 1,
+  },
+  headerRole: {
+    fontSize: 12,
+    fontFamily: 'Helvetica',
+    color: P_CREAM,
+    marginBottom: 8,
+  },
+  headerLink: {
+    fontSize: 10,
+    fontFamily: 'Helvetica',
+    color: P_GOLD,
+  },
+  headerContact: {
+    fontSize: 10,
+    fontFamily: 'Helvetica',
+    color: P_CREAM,
+    marginBottom: 8,
   },
   
   // FIX: Page Layout engine logic. Abolished global row flexing.
@@ -112,7 +82,7 @@ const styles = StyleSheet.create({
     color: P_WINE,
     textTransform: 'uppercase',
     borderBottom: `1px solid ${P_WINE}`,
-    paddingBottom: 6,
+    paddingBottom: 8,
     marginBottom: 16,
   },
   summaryText: {
@@ -176,7 +146,7 @@ const styles = StyleSheet.create({
   skillItem: {
     fontSize: 9,
     color: P_INK,
-    marginBottom: 10,
+    marginBottom: 6,
   },
   sidebarBlock: {
     marginBottom: 30,
@@ -239,31 +209,16 @@ export const CVPDF = ({ experiences }: { experiences: Experience[] }) => (
     <Page size="A4" style={styles.page}>
       
       {/* HEADER SECTION */}
-      <View style={styles.header}>
-        <View style={styles.photoBox}>
-          <Text style={styles.photoText}>Photo Here</Text>
+      <View style={[styles.header, { justifyContent: 'space-between' }]}>
+        <View style={styles.headerLeftCol}>
+          <Text style={styles.headerName}>KARUNGI ANNA</Text>
+          <Text style={styles.headerRole}>Full Stack Developer</Text>
+          <Text style={styles.headerLink}>Link to portfolio</Text>
         </View>
-        
-        <View style={styles.headerMain}>
-          <Text style={styles.headerTaglineTop}>Full-Stack Developer & UI/UX Designer</Text>
-          <Text style={styles.headerTitle}>Karungi Anna</Text>
-          
-          <Text style={styles.headerSubtitle}>
-            Crafting purposeful digital experiences through elegant code and thoughtful design. Available for remote collaboration worldwide.
-          </Text>
-          
-          <View style={styles.pillRow}>
-            <Text style={styles.pill}>GitHub</Text>
-            <Text style={styles.pill}>LinkedIn</Text>
-            <Text style={styles.pill}>Portfolio</Text>
-          </View>
-          
-          <View style={styles.headerContactCol}>
-            <Text style={styles.contactItem}>karungi.anna@example.com</Text>
-            <Text style={styles.contactItem}>+1 234 567 890</Text>
-            <Text style={styles.contactItem}>Kampala, Uganda</Text>
-            <Text style={styles.contactItem}>Open to Remote — Worldwide</Text>
-          </View>
+        <View style={styles.headerRightCol}>
+          <Text style={styles.headerContact}>+256 705 562066</Text>
+          <Text style={styles.headerContact}>KAMPALA, UGANDA</Text>
+          <Text style={styles.headerContact}>annakarungi15@gmail.com</Text>
         </View>
       </View>
 
@@ -275,13 +230,20 @@ export const CVPDF = ({ experiences }: { experiences: Experience[] }) => (
           <View style={styles.sidebarBlock}>
             <Text style={styles.sectionTitle}>Skills</Text>
             <Text style={styles.skillItem}>• React / Next.js</Text>
-            <Text style={styles.skillItem}>• Vue.js / Nuxt</Text>
+            <Text style={styles.skillItem}>• JavaScript</Text>
             <Text style={styles.skillItem}>• TypeScript</Text>
-            <Text style={styles.skillItem}>• Node.js / Express</Text>
-            <Text style={styles.skillItem}>• Python / Django</Text>
-            <Text style={styles.skillItem}>• PostgreSQL / MySQL</Text>
-            <Text style={styles.skillItem}>• REST & GraphQL APIs</Text>
+            <Text style={styles.skillItem}>• Tailwind CSS</Text>
             <Text style={styles.skillItem}>• Figma / UI Design</Text>
+            <Text style={styles.skillItem}>• Django REST Framework</Text>
+            <Text style={styles.skillItem}>• Python</Text>
+            <Text style={styles.skillItem}>• Node.js / Express</Text>
+            <Text style={styles.skillItem}>• REST APIs</Text>
+            <Text style={styles.skillItem}>• PostgreSQL / Neon</Text>
+            <Text style={styles.skillItem}>• MongoDB</Text>
+            <Text style={styles.skillItem}>• Docker</Text>
+            <Text style={styles.skillItem}>• CI/CD Pipelines</Text>
+            <Text style={styles.skillItem}>• Git / GitHub</Text>
+            <Text style={styles.skillItem}>• Agile / Scrum</Text>
           </View>
 
           <View style={styles.sidebarBlock}>

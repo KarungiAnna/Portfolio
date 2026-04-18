@@ -26,6 +26,8 @@
   opacity: 1;
 }
 
+.span12 { grid-column: span 12; }
+.span6 { grid-column: span 6; }
 .span7 { grid-column: span 7; }
 .span5 { grid-column: span 5; }
 .span4 { grid-column: span 4; }
@@ -46,6 +48,8 @@
   color: rgba(244, 239, 230, 0.3);
   text-transform: uppercase;
 }
+
+.projImageReal { background: #f8f6f2; }
 
 .projImage2 { background: linear-gradient(135deg, #6B2537, #B8923A); }
 .projImage3 { background: linear-gradient(135deg, #3D5C4A, #2B4235); }
