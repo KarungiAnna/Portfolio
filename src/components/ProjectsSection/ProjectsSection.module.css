@@ -35,13 +35,16 @@
 
 .projImage {
   width: 100%;
-  aspect-ratio: 16 / 10;
+  height: 320px;
   background: linear-gradient(135deg, #2B4235, #6B2537);
+  position: relative;
+  overflow: hidden;
+}
+
+.projImage:not(.projImageReal) {
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
-  overflow: hidden;
   font-size: 0.6rem;
   font-family: var(--ff-label);
   letter-spacing: 0.15em;
@@ -49,7 +52,9 @@
   text-transform: uppercase;
 }
 
-.projImageReal { background: #f8f6f2; }
+.projImageReal {
+  background: #f8f6f2;
+}
 
 .projImage2 { background: linear-gradient(135deg, #6B2537, #B8923A); }
 .projImage3 { background: linear-gradient(135deg, #3D5C4A, #2B4235); }
@@ -73,6 +78,7 @@
   opacity: 0;
   transition: opacity 0.3s ease;
   gap: 1rem;
+  z-index: 10;
 }
 
 .projOverlay a {

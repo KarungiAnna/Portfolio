@@ -2,8 +2,11 @@ import styles from './ProjectsSection.module.css';
 import sectionStyles from '../Section.module.css';
 import FadeIn from '../FadeIn/FadeIn';
 import Image from 'next/image';
+import { getAllProjects } from '@/db/queries';
 
-export default function ProjectsSection() {
+export default async function ProjectsSection() {
+  const projects = await getAllProjects();
+
   return (
     <section id="projects" className={`${sectionStyles.section} ${styles.projects}`} aria-labelledby="projects-heading">
       <div className={sectionStyles.sectionHeader}>
@@ -16,47 +19,42 @@ export default function ProjectsSection() {
       </div>
 
       <div className={styles.projectsGrid}>
-        {/* ACPS Project */}
-        <FadeIn className={`${styles.projectCard} ${styles.span6}`}>
-          <div className={`${styles.projImage} ${styles.projImageReal}`}>
-            <div className={styles.projOverlay}>
-              <a href="#">Live</a>
-            </div>
-            <Image 
-              src="/ACPS.png" 
-              alt="Automated Claims Portal" 
-              fill 
-              sizes="(max-width: 768px) 100vw, 50vw"
-              style={{ objectFit: 'contain' }} 
-            />
-          </div>
-          <div className={styles.projBody}>
-            <p className={styles.projTag}>React · TypeScript · Tailwind CSS · Django · PostgreSQL</p>
-            <h3 className={styles.projTitle}>Automated Claims Portal</h3>
-            <p className={styles.projDesc}>A full-stack insurance claims platform built for Old Mutual Uganda, handling the end-to-end lifecycle of insurance claims.</p>
-          </div>
-        </FadeIn>
-
-        {/* Brand Identity Project stays in place to maintain some grid aesthetic */}
-        <FadeIn className={`${styles.projectCard} ${styles.span6}`} delay={0.2}>
-          <div className={`${styles.projImage} ${styles.projImage5}`}>
-            <div className={styles.projOverlay}>
-              <a href="#">Live Demo</a>
-              <a href="#">GitHub</a>
-            </div>
-            <div className={styles.projImageInner}>
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="rgba(244,239,230,0.3)" strokeWidth="1">
-                <rect x="3" y="3" width="18" height="18" rx="2" /><circle cx="8.5" cy="8.5" r="1.5" />
-              </svg>
-              <span>Project Preview</span>
-            </div>
-          </div>
-          <div className={styles.projBody}>
-            <p className={styles.projTag}>Design System</p>
-            <h3 className={styles.projTitle}>Brand Identity</h3>
-            <p className={styles.projDesc}>Complete visual identity and component library for a FinTech startup.</p>
-          </div>
-        </FadeIn>
+        {projects.length > 0 ? (
+          projects.map((proj, idx) => (
+            <FadeIn key={proj.id} className={`${styles.projectCard} ${styles.span6}`} delay={idx * 0.2}>
+              <div className={`${styles.projImage} ${proj.imageUrl ? styles.projImageReal : styles.projImage5}`}>
+                <div className={styles.projOverlay}>
+                  {proj.liveUrl && <a href={proj.liveUrl} target="_blank" rel="noopener noreferrer">Live URL</a>}
+                  {proj.repoUrl && <a href={proj.repoUrl} target="_blank" rel="noopener noreferrer">Repo URL</a>}
+                </div>
+                {proj.imageUrl ? (
+                  <Image 
+                    src={proj.imageUrl} 
+                    alt={proj.title} 
+                    fill 
+                    priority={idx < 2}
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    style={{ objectFit: 'cover', objectPosition: 'left top' }} 
+                  />
+                ) : (
+                  <div className={styles.projImageInner}>
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="rgba(244,239,230,0.3)" strokeWidth="1">
+                      <rect x="3" y="3" width="18" height="18" rx="2" /><circle cx="8.5" cy="8.5" r="1.5" />
+                    </svg>
+                    <span>Project Preview</span>
+                  </div>
+                )}
+              </div>
+              <div className={styles.projBody}>
+                <p className={styles.projTag}>{proj.tag}</p>
+                <h3 className={styles.projTitle}>{proj.title}</h3>
+                <p className={styles.projDesc}>{proj.description}</p>
+              </div>
+            </FadeIn>
+          ))
+        ) : (
+          <p style={{ color: 'var(--muted)', gridColumn: '1 / -1' }}>No projects found.</p>
+        )}
       </div>
     </section>
   );

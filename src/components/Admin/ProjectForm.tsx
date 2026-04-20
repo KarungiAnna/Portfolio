@@ -62,6 +62,12 @@ export default function ProjectForm() {
         {errors.description && <span className={styles.errorText}>{errors.description.message}</span>}
       </div>
 
+      <div className={styles.formGroup}>
+        <label htmlFor="imageUrl">Image URL (Optional)</label>
+        <input id="imageUrl" type="text" {...register('imageUrl')} placeholder="/ACPS.png or https://..." />
+        {errors.imageUrl && <span className={styles.errorText}>{errors.imageUrl.message}</span>}
+      </div>
+
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
         <div className={styles.formGroup}>
           <label htmlFor="liveUrl">Live URL</label>

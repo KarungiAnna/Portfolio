@@ -4,6 +4,7 @@ export const ProjectSchema = z.object({
   title: z.string().min(1, "Title is required").max(120),
   description: z.string().min(1, "Description is required").max(500),
   tag: z.string().min(1, "Tag is required"),
+  imageUrl: z.string().optional().or(z.literal('')),
   liveUrl: z.string().url("Invalid URL").optional().or(z.literal('')),
   repoUrl: z.string().url("Invalid URL").optional().or(z.literal('')),
   order: z.number().int().optional(),

@@ -5,6 +5,7 @@ export const projects = pgTable('projects', {
   title: text('title').notNull(),
   description: text('description').notNull(),
   tag: text('tag').notNull(),
+  imageUrl: text('image_url'),
   liveUrl: text('live_url'),
   repoUrl: text('repo_url'),
   order: integer('order').default(0),
