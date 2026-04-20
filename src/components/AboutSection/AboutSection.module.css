@@ -70,12 +70,6 @@
   font-weight: 300;
 }
 
-.aboutContent p:first-of-type {
-  font-family: var(--ff-display);
-  font-size: 1.35rem;
-  color: var(--cream);
-  line-height: 1.5;
-}
 
 @media (max-width: 1024px) {
   .aboutGrid {
