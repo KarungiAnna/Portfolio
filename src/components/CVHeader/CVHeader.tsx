@@ -5,7 +5,7 @@ export default function CVHeader() {
     <div className={styles.cvHeader}>
       <div className={styles.cvNameBlock}>
         <h1 className={styles.cvName} style={{ marginBottom: '0.8rem', textTransform: 'uppercase', fontStyle: 'normal', fontSize: '2.5rem', letterSpacing: '0.05em' }}>KARUNGI ANNA</h1>
-        <p className={styles.cvRole} style={{ color: 'var(--cream)', letterSpacing: '0', fontSize: '0.85rem' }}>Full Stack Developer</p>
+        <p className={styles.cvRole} style={{ color: 'var(--cream)', letterSpacing: '0', fontSize: '0.85rem' }}>Junior Full Stack Developer</p>
         <a href="https://karungianna.dev" className={styles.cvRole} style={{ color: 'var(--gold)', letterSpacing: '0', textDecoration: 'none' }}>Link to portfolio</a>
       </div>
 

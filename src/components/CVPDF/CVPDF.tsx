@@ -212,7 +212,7 @@ export const CVPDF = ({ experiences }: { experiences: Experience[] }) => (
       <View style={[styles.header, { justifyContent: 'space-between' }]}>
         <View style={styles.headerLeftCol}>
           <Text style={styles.headerName}>KARUNGI ANNA</Text>
-          <Text style={styles.headerRole}>Full Stack Developer</Text>
+          <Text style={styles.headerRole}>Junior Full Stack Developer</Text>
           <Text style={styles.headerLink}>Link to portfolio</Text>
         </View>
         <View style={styles.headerRightCol}>
@@ -281,7 +281,7 @@ export const CVPDF = ({ experiences }: { experiences: Experience[] }) => (
         <View style={styles.mainContent}>
           <Text style={styles.sectionTitle}>Professional Summary</Text>
           <Text style={styles.summaryText}>
-            Results-driven Full-Stack Developer with 3+ years of experience designing and building scalable web applications and digital products. Adept at bridging the gap between design and engineering, with a strong focus on performance, accessibility, and user experience. Thrives in remote-first environments, collaborating with distributed teams across multiple time zones to deliver impactful, well-crafted solutions.
+            Results-driven Junior Full-Stack Developer with 3+ years of experience designing and building scalable web applications and digital products. Adept at bridging the gap between design and engineering, with a strong focus on performance, accessibility, and user experience. Thrives in remote-first environments, collaborating with distributed teams across multiple time zones to deliver impactful, well-crafted solutions.
           </Text>
 
           <View style={styles.divider} />

@@ -38,7 +38,7 @@ export default function CVPage() {
             <div className={sharedStyles.cvSection}>
               <h3 className={sharedStyles.cvSectionTitle}>Professional Summary</h3>
               <p className={styles.summaryText}>
-                Results-driven <em>Full-Stack Developer</em> with 3+ years of experience designing and building scalable web applications and digital products. Adept at bridging the gap between design and engineering, with a strong focus on performance, accessibility, and user experience. Thrives in remote-first environments, collaborating with distributed teams across multiple time zones to deliver impactful, well-crafted solutions.
+                Results-driven <em>Junior Full-Stack Developer</em> with 3+ years of experience designing and building scalable web applications and digital products. Adept at bridging the gap between design and engineering, with a strong focus on performance, accessibility, and user experience. Thrives in remote-first environments, collaborating with distributed teams across multiple time zones to deliver impactful, well-crafted solutions.
               </p>
             </div>
 
@@ -63,7 +63,7 @@ export default function CVPage() {
                 />
 
                 <CVExperienceItem
-                  role="Full-Stack Developer"
+                  role="Junior Full-Stack Developer"
                   duration="Jun 2022 — Dec 2023"
                   companyName="Digital Africa Ltd."
                   companyUrl="https://digitalafrica.example.com"
