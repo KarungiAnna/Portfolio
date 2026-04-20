@@ -34,7 +34,7 @@ export default async function ProjectsSection() {
                     fill 
                     priority={idx < 2}
                     sizes="(max-width: 768px) 100vw, 50vw"
-                    style={{ objectFit: 'cover', objectPosition: 'left top' }} 
+                    style={{ objectFit: 'contain', objectPosition: 'center' }} 
                   />
                 ) : (
                   <div className={styles.projImageInner}>
