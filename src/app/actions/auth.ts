@@ -2,15 +2,16 @@
 
 import { getSession } from '@/lib/session';
 import { redirect } from 'next/navigation';
+import bcrypt from 'bcryptjs';
 
 export async function login(prevState: { error: string } | undefined, formData: FormData) {
   const username = formData.get('username') as string;
   const password = formData.get('password') as string;
 
-  if (
-    username === process.env.ADMIN_USERNAME &&
-    password === process.env.ADMIN_PASSWORD
-  ) {
+  const usernameMatch = username === process.env.ADMIN_USERNAME;
+  const passwordMatch = await bcrypt.compare(password, process.env.ADMIN_PASSWORD!);
+
+  if (usernameMatch && passwordMatch) {
     const session = await getSession();
     session.isLoggedIn = true;
     await session.save();
