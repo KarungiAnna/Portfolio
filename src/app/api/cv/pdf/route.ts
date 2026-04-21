@@ -5,16 +5,32 @@ import React from 'react';
 import { NextResponse } from 'next/server';
 import { renderToStream } from '@react-pdf/renderer';
 import { CVPDF } from '@/components/CVPDF/CVPDF';
-import { getAllExperiences } from '@/db/queries';
+import { getSummary, getAllExperiences, getAllEducation, getAllSkills, getAllStrengths, getAllCertifications, getAllReferees } from '@/db/queries';
 
 export async function GET() {
   try {
-    const experiences = await getAllExperiences();
-    
-    // React-PDF renders to a Node.js Readable stream
-    const nodeStream = await renderToStream(React.createElement(CVPDF, { experiences }) as any);
-    
-    // Polyfill conversion from Node Stream to Web ReadableStream for Next.js App Router
+    const [summary, experiences, education, skills, strengths, certifications, referees] = await Promise.all([
+      getSummary(),
+      getAllExperiences(),
+      getAllEducation(),
+      getAllSkills(),
+      getAllStrengths(),
+      getAllCertifications(),
+      getAllReferees(),
+    ]);
+
+    const nodeStream = await renderToStream(
+      React.createElement(CVPDF, {
+        summary: summary?.content ?? null,
+        experiences,
+        education,
+        skills,
+        strengths,
+        certifications,
+        referees,
+      }) as any
+    );
+
     const webStream = new ReadableStream({
       start(controller) {
         nodeStream.on('data', (chunk) => controller.enqueue(chunk));

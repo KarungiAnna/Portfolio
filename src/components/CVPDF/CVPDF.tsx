@@ -2,7 +2,6 @@ import React from 'react';
 import { Document, Page, Text, View, StyleSheet } from '@react-pdf/renderer';
 
 const P_GREEN = '#294034';
-const P_GREEN_LT = '#3e5c4d';
 const P_CREAM = '#f5efe6';
 const P_WINE = '#6b2537';
 const P_GOLD = '#d4af37';
@@ -54,8 +53,6 @@ const styles = StyleSheet.create({
     color: P_CREAM,
     marginBottom: 8,
   },
-  
-  // FIX: Page Layout engine logic. Abolished global row flexing.
   bodyContainer: {
     position: 'relative',
     width: '100%',
@@ -64,17 +61,16 @@ const styles = StyleSheet.create({
     position: 'absolute',
     left: 0,
     top: 0,
-    bottom: 0, // Reaches the bottom of the content boundary on Page 1
+    bottom: 0,
     width: '32%',
     padding: '30px 20px 30px 40px',
     borderRight: `1px solid ${P_BORDER}`,
   },
   mainContent: {
-    marginLeft: '32%', // Prevents overlapping without Flex row conflicts
+    marginLeft: '32%',
     width: '68%',
     padding: '30px 40px 30px 30px',
   },
-  
   sectionTitle: {
     fontFamily: 'Helvetica',
     fontSize: 9,
@@ -138,11 +134,6 @@ const styles = StyleSheet.create({
     lineHeight: 1.5,
     color: P_INK,
   },
-  achText: {
-    fontSize: 10,
-    lineHeight: 1.5,
-    color: P_INK,
-  },
   skillItem: {
     fontSize: 9,
     color: P_INK,
@@ -181,6 +172,20 @@ const styles = StyleSheet.create({
     color: P_MUTED,
     lineHeight: 1.4,
   },
+  refereeItem: {
+    marginBottom: 16,
+  },
+  refName: {
+    fontSize: 10,
+    fontFamily: 'Helvetica-Bold',
+    color: P_INK,
+    marginBottom: 2,
+  },
+  refDetail: {
+    fontSize: 9,
+    color: P_MUTED,
+    marginBottom: 2,
+  },
   footer: {
     backgroundColor: P_GREEN,
     flexDirection: 'row',
@@ -197,18 +202,27 @@ const styles = StyleSheet.create({
   },
 });
 
-type Experience = {
-  role: string;
-  duration: string;
-  companyName: string;
-  bullets: string[];
+type Experience = { role: string; duration: string; companyName: string; bullets: string[] };
+type Education = { degree: string; institution: string; year: string };
+type Skill = { name: string };
+type Strength = { title: string; proof: string };
+type Certification = { name: string; issuer: string; year: string };
+type Referee = { name: string; title: string; company: string; email: string; phone: string | null };
+
+type Props = {
+  summary: string | null;
+  experiences: Experience[];
+  education: Education[];
+  skills: Skill[];
+  strengths: Strength[];
+  certifications: Certification[];
+  referees: Referee[];
 };
 
-export const CVPDF = ({ experiences }: { experiences: Experience[] }) => (
+export const CVPDF = ({ summary, experiences, education, skills, strengths, certifications, referees }: Props) => (
   <Document>
     <Page size="A4" style={styles.page}>
-      
-      {/* HEADER SECTION */}
+
       <View style={[styles.header, { justifyContent: 'space-between' }]}>
         <View style={styles.headerLeftCol}>
           <Text style={styles.headerName}>KARUNGI ANNA</Text>
@@ -222,111 +236,109 @@ export const CVPDF = ({ experiences }: { experiences: Experience[] }) => (
         </View>
       </View>
 
-      {/* TWO COLUMN BODY REFACTORED TO ABSOLUTE SIDEBAR FOR PAGINATION SAFETY */}
       <View style={styles.bodyContainer}>
-        
-        {/* SIDEBAR ON PAGE 1 */}
+
+        {/* SIDEBAR */}
         <View style={styles.sidebar}>
-          <View style={styles.sidebarBlock}>
-            <Text style={styles.sectionTitle}>Skills</Text>
-            <Text style={styles.skillItem}>• React / Next.js</Text>
-            <Text style={styles.skillItem}>• JavaScript</Text>
-            <Text style={styles.skillItem}>• TypeScript</Text>
-            <Text style={styles.skillItem}>• Tailwind CSS</Text>
-            <Text style={styles.skillItem}>• Figma / UI Design</Text>
-            <Text style={styles.skillItem}>• Django REST Framework</Text>
-            <Text style={styles.skillItem}>• Python</Text>
-            <Text style={styles.skillItem}>• Node.js / Express</Text>
-            <Text style={styles.skillItem}>• REST APIs</Text>
-            <Text style={styles.skillItem}>• PostgreSQL / Neon</Text>
-            <Text style={styles.skillItem}>• MongoDB</Text>
-            <Text style={styles.skillItem}>• Docker</Text>
-            <Text style={styles.skillItem}>• CI/CD Pipelines</Text>
-            <Text style={styles.skillItem}>• Git / GitHub</Text>
-            <Text style={styles.skillItem}>• Agile / Scrum</Text>
-          </View>
+          {skills.length > 0 && (
+            <View style={styles.sidebarBlock}>
+              <Text style={styles.sectionTitle}>Skills</Text>
+              {skills.map((s, i) => (
+                <Text key={i} style={styles.skillItem}>• {s.name}</Text>
+              ))}
+            </View>
+          )}
 
-          <View style={styles.sidebarBlock}>
-            <Text style={styles.sectionTitle}>Education</Text>
-            <View>
-              <Text style={styles.eduDegree}>MSc. Computer Science</Text>
-              <Text style={styles.eduSchool}>Makerere University, Kampala</Text>
-              <Text style={styles.eduYear}>2022 — 2024</Text>
+          {(education.length > 0 || certifications.length > 0) && (
+            <View style={styles.sidebarBlock}>
+              {education.length > 0 && (
+                <>
+                  <Text style={styles.sectionTitle}>Education</Text>
+                  {education.map((edu, i) => (
+                    <View key={i}>
+                      <Text style={styles.eduDegree}>{edu.degree}</Text>
+                      <Text style={styles.eduSchool}>{edu.institution}</Text>
+                      <Text style={styles.eduYear}>{edu.year}</Text>
+                    </View>
+                  ))}
+                </>
+              )}
+              {certifications.length > 0 && (
+                <>
+                  <Text style={[styles.sectionTitle, { marginTop: 12 }]}>Certifications</Text>
+                  {certifications.map((cert, i) => (
+                    <View key={i}>
+                      <Text style={styles.eduDegree}>{cert.name}</Text>
+                      <Text style={styles.eduSchool}>{cert.issuer}</Text>
+                      <Text style={styles.eduYear}>{cert.year}</Text>
+                    </View>
+                  ))}
+                </>
+              )}
             </View>
-            <View>
-              <Text style={styles.eduDegree}>BSc. Software Engineering</Text>
-              <Text style={styles.eduSchool}>Makerere University, Kampala</Text>
-              <Text style={styles.eduYear}>2018 — 2022</Text>
-            </View>
-          </View>
+          )}
 
-          <View style={styles.sidebarBlock}>
-            <Text style={styles.sectionTitle}>Strengths</Text>
-            <View style={styles.strengthItem}>
-              <Text style={styles.strengthName}>Problem Solving</Text>
-              <Text style={styles.strengthProof}>Reduced system latency by 40% via re-architecting APIs.</Text>
-            </View>
-            <View style={styles.strengthItem}>
-              <Text style={styles.strengthName}>Communication</Text>
-              <Text style={styles.strengthProof}>Consistently rated 4.9/5 by clients for clarity.</Text>
-            </View>
-            <View style={styles.strengthItem}>
-              <Text style={styles.strengthName}>Adaptability</Text>
-              <Text style={styles.strengthProof}>Onboarded to 3 new tech stacks within 2 weeks each.</Text>
-            </View>
-          </View>
-        </View>
-        
-        {/* MAIN CONTENT (Paginates infinitely without Flex Row overlap bugs) */}
-        <View style={styles.mainContent}>
-          <Text style={styles.sectionTitle}>Professional Summary</Text>
-          <Text style={styles.summaryText}>
-            Results-driven Junior Full-Stack Developer with 3+ years of experience designing and building scalable web applications and digital products. Adept at bridging the gap between design and engineering, with a strong focus on performance, accessibility, and user experience. Thrives in remote-first environments, collaborating with distributed teams across multiple time zones to deliver impactful, well-crafted solutions.
-          </Text>
-
-          <View style={styles.divider} />
-
-          <Text style={styles.sectionTitle}>Work Experience</Text>
-          
-          {experiences.length > 0 ? experiences.map((exp, idx) => (
-            <View key={idx} style={styles.experienceItem}>
-              <Text style={styles.expRole}>{exp.role}</Text>
-              <View style={styles.expCompanyRow}>
-                <Text style={styles.expCompany}>{exp.companyName}</Text>
-                <Text style={styles.expDuration}>{exp.duration}</Text>
-              </View>
-              
-              {exp.bullets.map((bullet, bIdx) => (
-                <View key={bIdx} style={styles.bulletRow}>
-                  <Text style={styles.bulletPoint}>•</Text>
-                  <Text style={styles.bulletText}>{bullet}</Text>
+          {strengths.length > 0 && (
+            <View style={styles.sidebarBlock}>
+              <Text style={styles.sectionTitle}>Strengths</Text>
+              {strengths.map((s, i) => (
+                <View key={i} style={styles.strengthItem}>
+                  <Text style={styles.strengthName}>{s.title}</Text>
+                  <Text style={styles.strengthProof}>{s.proof}</Text>
                 </View>
               ))}
             </View>
-          )) : (
-            <Text style={styles.summaryText}>No experiences configured.</Text>
+          )}
+        </View>
+
+        {/* MAIN CONTENT */}
+        <View style={styles.mainContent}>
+          {summary && (
+            <>
+              <Text style={styles.sectionTitle}>Professional Summary</Text>
+              <Text style={styles.summaryText}>{summary}</Text>
+              <View style={styles.divider} />
+            </>
           )}
 
-          <View style={styles.divider} />
+          {experiences.length > 0 && (
+            <>
+              <Text style={styles.sectionTitle}>Work Experience</Text>
+              {experiences.map((exp, idx) => (
+                <View key={idx} style={styles.experienceItem}>
+                  <Text style={styles.expRole}>{exp.role}</Text>
+                  <View style={styles.expCompanyRow}>
+                    <Text style={styles.expCompany}>{exp.companyName}</Text>
+                    <Text style={styles.expDuration}>{exp.duration}</Text>
+                  </View>
+                  {exp.bullets.map((bullet, bIdx) => (
+                    <View key={bIdx} style={styles.bulletRow}>
+                      <Text style={styles.bulletPoint}>•</Text>
+                      <Text style={styles.bulletText}>{bullet}</Text>
+                    </View>
+                  ))}
+                </View>
+              ))}
+            </>
+          )}
 
-          <Text style={styles.sectionTitle}>Achievements</Text>
-          
-          {/* REMOVED wrap={false} WHICH WAS CAUSING THE TEXT COLLISION BUG ON PAGE BREAKS */}
-          <View style={styles.experienceItem}>
-            <Text style={styles.expRole}>1st Place — HackAfrica 2023 Hackathon</Text>
-            <Text style={styles.achText}>Led a 4-person team to build an AI-powered agri-finance tool, winning from a field of 120+ teams across 12 African countries.</Text>
-          </View>
-          
-          <View style={styles.experienceItem}>
-            <Text style={styles.expRole}>Open Source Contributions</Text>
-            <Text style={styles.achText}>Merged 18 pull requests into popular open-source repositories (React Query, Radix UI), accumulating 240+ GitHub stars on personal projects.</Text>
-          </View>
-          
+          {referees.length > 0 && (
+            <>
+              <View style={styles.divider} />
+              <Text style={styles.sectionTitle}>Referees</Text>
+              {referees.map((ref, i) => (
+                <View key={i} style={styles.refereeItem}>
+                  <Text style={styles.refName}>{ref.name}</Text>
+                  <Text style={styles.refDetail}>{ref.title} · {ref.company}</Text>
+                  <Text style={styles.refDetail}>{ref.email}{ref.phone ? ` · ${ref.phone}` : ''}</Text>
+                </View>
+              ))}
+            </>
+          )}
         </View>
 
       </View>
 
-      {/* FOOTER - Centered strict string */}
       <View style={styles.footer} fixed>
         <Text style={styles.footerText}>© 2026 Karungi Anna. All rights reserved.</Text>
       </View>
