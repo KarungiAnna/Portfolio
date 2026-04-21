@@ -1,5 +1,52 @@
 import { pgTable, serial, text, integer, timestamp, jsonb } from 'drizzle-orm/pg-core';
 
+export const cvSummary = pgTable('cv_summary', {
+  id: serial('id').primaryKey(),
+  content: text('content').notNull(),
+});
+
+export const cvEducation = pgTable('cv_education', {
+  id: serial('id').primaryKey(),
+  degree: text('degree').notNull(),
+  institution: text('institution').notNull(),
+  year: text('year').notNull(),
+  description: text('description'),
+  order: integer('order').default(0),
+});
+
+export const cvSkills = pgTable('cv_skills', {
+  id: serial('id').primaryKey(),
+  name: text('name').notNull(),
+  category: text('category'),
+  order: integer('order').default(0),
+});
+
+export const cvStrengths = pgTable('cv_strengths', {
+  id: serial('id').primaryKey(),
+  title: text('title').notNull(),
+  proof: text('proof').notNull(),
+  order: integer('order').default(0),
+});
+
+export const cvCertifications = pgTable('cv_certifications', {
+  id: serial('id').primaryKey(),
+  name: text('name').notNull(),
+  issuer: text('issuer').notNull(),
+  year: text('year').notNull(),
+  url: text('url'),
+  order: integer('order').default(0),
+});
+
+export const cvReferees = pgTable('cv_referees', {
+  id: serial('id').primaryKey(),
+  name: text('name').notNull(),
+  title: text('title').notNull(),
+  company: text('company').notNull(),
+  email: text('email').notNull(),
+  phone: text('phone'),
+  order: integer('order').default(0),
+});
+
 export const projects = pgTable('projects', {
   id: serial('id').primaryKey(),
   title: text('title').notNull(),
