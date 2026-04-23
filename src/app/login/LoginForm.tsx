@@ -15,12 +15,12 @@ export default function LoginForm() {
       
       <div className={styles.formGroup}>
         <label htmlFor="username">Username</label>
-        <input type="text" id="username" name="username" required disabled={pending} />
+        <input type="text" id="username" name="username" required disabled={pending} autoComplete="username" />
       </div>
-      
+
       <div className={styles.formGroup}>
         <label htmlFor="password">Password</label>
-        <input type="password" id="password" name="password" required disabled={pending} />
+        <input type="password" id="password" name="password" required disabled={pending} autoComplete="current-password" />
       </div>
       
       <button type="submit" disabled={pending} className={styles.btn}>

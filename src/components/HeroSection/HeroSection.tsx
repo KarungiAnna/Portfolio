@@ -13,7 +13,7 @@ export default function HeroSection() {
           Crafting Purposeful<br /><em>Digital Experiences</em>
         </h1>
 
-        <p className={styles.heroSubtitle}>Hey, I'm <strong style={{ color: '#F4EFE6', fontWeight: 'bold' }}>Karungi Anna</strong> — a Full-Stack Developer &amp; UI/UX Designer</p>
+        <p className={styles.heroSubtitle}>Hey, I'm <strong style={{ color: '#F4EFE6', fontWeight: 'bold' }}>Karungi Anna</strong> — a Junior Full-Stack Developer &amp; UI/UX Designer</p>
         <p className={styles.heroLocation}>
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ display: 'inline-block', verticalAlign: 'text-bottom', marginRight: '4px' }}>
             <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
