@@ -1,45 +1,35 @@
 .expItem {
-  margin-bottom: 1.8rem;
-  position: relative;
+  padding-bottom: 2.2rem;
+  margin-bottom: 2.2rem;
+  border-bottom: 1px solid var(--border);
+  transition: transform 0.2s ease;
 }
 
-.expItem::before {
-  content: '';
-  position: absolute;
-  left: -2rem;
-  top: 0.5rem;
-  bottom: -1.8rem;
-  width: 1px;
-  background: var(--border);
+.expItem:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+  margin-bottom: 0;
 }
 
-.expItem:last-child::before {
-  display: none;
-}
-
-.expItem::after {
-  content: '';
-  position: absolute;
-  left: -2.2rem;
-  top: 0.45rem;
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  border: 2px solid var(--wine);
-  background: var(--cream);
+.expItem:hover {
+  transform: translateX(3px);
 }
 
 .expHeader {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
+  /* Keeps role + company name + description together as one block */
+}
+
+.expMeta {
+  display: grid;
+  grid-template-columns: 1fr auto;
   gap: 1rem;
-  margin-bottom: 0.15rem;
+  align-items: baseline;
+  margin-bottom: 0.2rem;
 }
 
 .expRole {
   font-family: var(--ff-display);
-  font-size: 1.1rem;
+  font-size: 1.18rem;
   font-weight: 600;
   color: var(--ink);
   line-height: 1.2;
@@ -47,43 +37,58 @@
 
 .expDuration {
   font-family: var(--ff-label);
-  font-size: 0.52rem;
-  letter-spacing: 0.14em;
+  font-size: 0.5rem;
+  letter-spacing: 0.15em;
   color: var(--wine);
   text-transform: uppercase;
   white-space: nowrap;
-  margin-top: 0.2rem;
+}
+
+.expCompanyRow {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.85rem;
+}
+
+.expCompanyName {
+  font-family: var(--ff-label);
+  font-size: 0.52rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--green);
+  text-decoration: none;
+}
+
+.expDivot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--border);
   flex-shrink: 0;
 }
 
-.expCompany {
-  font-size: 0.82rem;
+.expCompanyDesc {
+  font-size: 0.78rem;
   color: var(--muted);
-  margin-bottom: 0.7rem;
-}
-
-.expCompany a {
-  color: var(--green);
-  text-decoration: none;
-  border-bottom: 1px solid transparent;
-  transition: border-color 0.2s ease;
-}
-
-.expCompany a:hover {
-  border-bottom-color: var(--green);
+  font-weight: 300;
+  font-style: italic;
 }
 
 .expBullets {
   list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
   padding: 0;
   margin: 0;
 }
 
 .expBullet {
-  font-size: 0.82rem;
+  font-size: 0.83rem;
   color: var(--ink);
-  line-height: 1.6;
-  padding: 0.2rem 0 0.2rem 1rem;
+  line-height: 1.65;
+  padding-left: 1.1rem;
   position: relative;
   font-weight: 300;
 }
@@ -93,11 +98,51 @@
   position: absolute;
   left: 0;
   color: var(--wine);
-  font-size: 0.7rem;
-  top: 0.25rem;
+  font-size: 0.68rem;
+  top: 0.15rem;
 }
 
-.expBullet :global(strong) {
+.expBullet strong {
   font-weight: 500;
   color: var(--green);
+}
+
+@media (max-width: 768px) {
+  .expMeta {
+    grid-template-columns: 1fr;
+    gap: 0.2rem;
+  }
+  
+  .expCompanyRow {
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+  
+  .expDivot {
+    display: none;
+  }
+}
+
+@media print {
+  /*
+   * .expHeader wraps the role, duration, company name, and description.
+   * break-inside: avoid keeps all of that together as one unit.
+   * break-after: avoid keeps the header glued to the bullets below it.
+   * Together they prevent the company name being orphaned at the page bottom
+   * while its description and bullets appear on the next page.
+   */
+  .expHeader {
+    break-inside: avoid;
+    break-after: avoid;
+  }
+
+  .expBullets {
+    break-before: avoid;
+  }
+
+  /* Disable the hover slide animation during print */
+  .expItem {
+    transform: none !important;
+    transition: none;
+  }
 }

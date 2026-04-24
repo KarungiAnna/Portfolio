@@ -3,22 +3,33 @@ import Link from 'next/link';
 import styles from './cv.module.css';
 import sharedStyles from '@/components/CVShared.module.css';
 import CVHeader from '@/components/CVHeader/CVHeader';
-import CVSidebar from '@/components/CVSidebar/CVSidebar';
 import CVExperienceItem from '@/components/CVExperienceItem/CVExperienceItem';
-import { getSummary, getAllExperiences, getAllEducation, getAllSkills, getAllStrengths, getAllCertifications, getAllReferees } from '@/db/queries';
+import PrintButton from '@/components/PrintButton/PrintButton';
+import { 
+  getSummary, 
+  getAllExperiences, 
+  getAllEducation, 
+  getAllSkills, 
+  getAllStrengths, 
+  getAllCertifications, 
+  getAllReferees 
+} from '@/db/queries';
 
 export const metadata: Metadata = {
   title: 'Karungi Anna — Curriculum Vitae',
   description: 'The CV of Karungi Anna',
-  alternates: {
-    types: {
-      'application/pdf': '/api/cv/pdf',
-    },
-  },
 };
 
 export default async function CVPage() {
-  const [summary, experiences, education, skills, strengths, certifications, referees] = await Promise.all([
+  const [
+    summary, 
+    experiences, 
+    education, 
+    skills, 
+    strengths, 
+    certifications, 
+    referees
+  ] = await Promise.all([
     getSummary(),
     getAllExperiences(),
     getAllEducation(),
@@ -28,12 +39,18 @@ export default async function CVPage() {
     getAllReferees(),
   ]);
 
+  // Group skills by category
+  const groupedSkills = skills.reduce((acc, skill) => {
+    const cat = skill.category || 'Other';
+    if (!acc[cat]) acc[cat] = [];
+    acc[cat].push(skill);
+    return acc;
+  }, {} as Record<string, typeof skills>);
+
   return (
     <div className={styles.cvWrapper}>
       <div className={styles.cvActions}>
-        <a href="/api/cv/pdf" download="karungi-anna-cv.pdf" className={styles.actionBtn}>
-          ⎙ Download PDF
-        </a>
+        <PrintButton />
         <Link href="/" className={styles.actionBtnSecondary}>
           ← Back to Portfolio
         </Link>
@@ -43,69 +60,155 @@ export default async function CVPage() {
         <CVHeader />
 
         <div className={styles.cvBody}>
-          <CVSidebar
-            skills={skills}
-            education={education}
-            certifications={certifications}
-            strengths={strengths}
-          />
-
-          <main className={styles.cvMain}>
-            {summary?.content && (
-              <div className={sharedStyles.cvSection}>
-                <h3 className={sharedStyles.cvSectionTitle}>Professional Summary</h3>
+          
+          {/* Professional Summary */}
+          {summary?.content && (
+            <section className={sharedStyles.cvSection}>
+              <div className={sharedStyles.cvSectionHead}>
+                <span className={sharedStyles.cvSectionOrnament}>✦</span>
+                <h2 className={sharedStyles.cvSectionTitle}>Professional Summary</h2>
+                <div className={sharedStyles.cvSectionLine}></div>
+              </div>
+              <div className={styles.summaryBlock}>
                 <p className={styles.summaryText}>{summary.content}</p>
               </div>
-            )}
+            </section>
+          )}
 
-            {experiences.length > 0 && (
-              <>
-                {summary?.content && <div className={sharedStyles.cvDivider}><span className={sharedStyles.cvDividerOrnament}>✦</span></div>}
-                <div className={sharedStyles.cvSection}>
-                  <h3 className={sharedStyles.cvSectionTitle}>Work Experience</h3>
-                  <div style={{ paddingLeft: '2rem', position: 'relative' }}>
-                    {experiences.map(exp => (
-                      <CVExperienceItem
-                        key={exp.id}
-                        role={exp.role}
-                        duration={exp.duration}
-                        companyName={exp.companyName}
-                        companyUrl={exp.companyUrl ?? undefined}
-                        companyDescription={exp.companyDescription}
-                        bullets={exp.bullets}
-                      />
-                    ))}
-                  </div>
-                </div>
-              </>
-            )}
+          {/* Work Experience */}
+          {experiences.length > 0 && (
+            <section className={sharedStyles.cvSection}>
+              <div className={sharedStyles.cvSectionHead}>
+                <span className={sharedStyles.cvSectionOrnament}>✦</span>
+                <h2 className={sharedStyles.cvSectionTitle}>Work Experience</h2>
+                <div className={sharedStyles.cvSectionLine}></div>
+              </div>
+              <div className={styles.expList}>
+                {experiences.map(exp => (
+                  <CVExperienceItem
+                    key={exp.id}
+                    role={exp.role}
+                    duration={exp.duration}
+                    companyName={exp.companyName}
+                    companyUrl={exp.companyUrl ?? undefined}
+                    companyDescription={exp.companyDescription}
+                    bullets={exp.bullets}
+                  />
+                ))}
+              </div>
+            </section>
+          )}
 
-            {referees.length > 0 && (
-              <>
-                <div className={sharedStyles.cvDivider}><span className={sharedStyles.cvDividerOrnament}>✦</span></div>
-                <div className={sharedStyles.cvSection}>
-                  <h3 className={sharedStyles.cvSectionTitle}>Referees</h3>
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '1.2rem' }}>
-                    {referees.map(ref => (
-                      <div key={ref.id} style={{ padding: '1rem', border: '1px solid var(--border)', background: 'var(--cream-2)' }}>
-                        <div style={{ fontFamily: 'var(--ff-display)', fontWeight: 600, fontSize: '0.95rem', color: 'var(--ink)', marginBottom: '0.2rem' }}>{ref.name}</div>
-                        <div style={{ fontSize: '0.78rem', color: 'var(--muted)', marginBottom: '0.1rem' }}>{ref.title}</div>
-                        <div style={{ fontSize: '0.78rem', color: 'var(--muted)', marginBottom: '0.5rem' }}>{ref.company}</div>
-                        <div style={{ fontSize: '0.75rem', color: 'var(--ink)' }}>{ref.email}</div>
-                        {ref.phone && <div style={{ fontSize: '0.75rem', color: 'var(--ink)' }}>{ref.phone}</div>}
-                      </div>
-                    ))}
+          {/* Skills & Technologies */}
+          {skills.length > 0 && (
+            <section className={sharedStyles.cvSection}>
+              <div className={sharedStyles.cvSectionHead}>
+                <span className={sharedStyles.cvSectionOrnament}>✦</span>
+                <h2 className={sharedStyles.cvSectionTitle}>Skills & Technologies</h2>
+                <div className={sharedStyles.cvSectionLine}></div>
+              </div>
+              <div className={styles.skillRows}>
+                {Object.entries(groupedSkills).map(([category, items]) => (
+                  <div key={category} className={styles.skillRow}>
+                    <span className={styles.skillRowLabel}>{category}</span>
+                    <span className={styles.skillRowItems}>
+                      {items.map(s => s.name).join(' · ')}
+                    </span>
                   </div>
-                </div>
-              </>
-            )}
-          </main>
+                ))}
+              </div>
+            </section>
+          )}
+
+          {/* Education */}
+          {education.length > 0 && (
+            <section className={sharedStyles.cvSection}>
+              <div className={sharedStyles.cvSectionHead}>
+                <span className={sharedStyles.cvSectionOrnament}>✦</span>
+                <h2 className={sharedStyles.cvSectionTitle}>Education</h2>
+                <div className={sharedStyles.cvSectionLine}></div>
+              </div>
+              <div className={styles.eduList}>
+                {education.map(edu => (
+                  <div key={edu.id} className={styles.eduItem}>
+                    <div className={styles.eduDegree}>{edu.degree}</div>
+                    <div className={styles.eduSchool}>{edu.institution}</div>
+                    <div className={styles.eduYear}>{edu.year}</div>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+
+          {/* Certifications */}
+          {certifications.length > 0 && (
+            <section className={sharedStyles.cvSection}>
+              <div className={sharedStyles.cvSectionHead}>
+                <span className={sharedStyles.cvSectionOrnament}>✦</span>
+                <h2 className={sharedStyles.cvSectionTitle}>Certifications</h2>
+                <div className={sharedStyles.cvSectionLine}></div>
+              </div>
+              <div className={styles.eduList}>
+                {certifications.map(cert => (
+                  <div key={cert.id} className={styles.eduItem}>
+                    <div className={styles.eduDegree}>{cert.name}</div>
+                    <div className={styles.eduSchool}>{cert.issuer}</div>
+                    <div className={styles.eduYear}>{cert.year}</div>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+
+          {/* Strengths */}
+          {strengths.length > 0 && (
+            <section className={sharedStyles.cvSection}>
+              <div className={sharedStyles.cvSectionHead}>
+                <span className={sharedStyles.cvSectionOrnament}>✦</span>
+                <h2 className={sharedStyles.cvSectionTitle}>Strengths</h2>
+                <div className={sharedStyles.cvSectionLine}></div>
+              </div>
+              <div className={styles.strengthsList}>
+                {strengths.map(s => (
+                  <div key={s.id} className={styles.strengthItem}>
+                    <p className={styles.strengthName}>{s.title}</p>
+                    <p className={styles.strengthProof}>{s.proof}</p>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+
+          {/* Referees */}
+          {referees.length > 0 && (
+            <section className={sharedStyles.cvSection}>
+              <div className={sharedStyles.cvSectionHead}>
+                <span className={sharedStyles.cvSectionOrnament}>✦</span>
+                <h2 className={sharedStyles.cvSectionTitle}>Referees</h2>
+                <div className={sharedStyles.cvSectionLine}></div>
+              </div>
+              <div className={styles.refGrid}>
+                {referees.map(ref => (
+                  <div key={ref.id} className={styles.refCard}>
+                    <div className={styles.refName}>{ref.name}</div>
+                    <div className={styles.refTitle}>{ref.title}</div>
+                    <div className={styles.refOrg}>{ref.company}</div>
+                    <div className={styles.refContacts}>
+                      <div className={styles.refContact}>✉ <a href={`mailto:${ref.email}`}>{ref.email}</a></div>
+                      {ref.phone && <div className={styles.refContact}>☏ {ref.phone}</div>}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+
         </div>
 
         <footer className={styles.cvFooter}>
-          <p>© 2026 Karungi Anna. All rights reserved.</p>
+          <p>Curriculum Vitae — 2026</p>
           <span className={styles.footerName}>Karungi Anna</span>
-          <p>Designed &amp; Built with ♥</p>
+          <p>annakarungi15@gmail.com · karungi-anna.vercel.app</p>
         </footer>
       </div>
     </div>

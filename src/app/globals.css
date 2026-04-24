@@ -67,3 +67,36 @@ h1, h2, h3, h4 {
   outline: 3px solid var(--gold);
   outline-offset: 2px;
 }
+
+@media print {
+  /* Force all backgrounds and colors to print exactly as on screen */
+  *,
+  *::before,
+  *::after {
+    print-color-adjust: exact !important;
+    -webkit-print-color-adjust: exact !important;
+  }
+
+  /* Hide global noise texture overlay so it doesn't grey-wash the printed CV */
+  body::before {
+    display: none !important;
+  }
+  
+  /* Prevent body background from printing as a coloured page margin */
+  body {
+    background: white !important;
+  }
+
+  /* Hide the site navigation, footer, and skip-to-content link during print */
+  nav,
+  footer:not(.cvFooter),
+  a[href="#main-content"] {
+    display: none !important;
+  }
+
+  /* Ensure the main content wrapper doesn't have offset margins in print */
+  #main-content {
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+  }
+}

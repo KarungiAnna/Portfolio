@@ -1,38 +1,38 @@
 .cvSection {
-  margin-bottom: 2.2rem;
+  margin-bottom: 2.8rem;
+}
+
+.cvSection:last-child {
+  margin-bottom: 0;
+}
+
+/* ── Section heading: ✦ TITLE ——————— */
+.cvSectionHead {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  margin-bottom: 1.8rem;
+  break-after: avoid; /* Prevents orphan headings — keeps title attached to content below */
+}
+
+.cvSectionOrnament {
+  color: var(--wine);
+  font-size: 0.55rem;
+  opacity: 0.45;
+  flex-shrink: 0;
 }
 
 .cvSectionTitle {
   font-family: var(--ff-label);
-  font-size: 0.58rem;
-  letter-spacing: 0.22em;
+  font-size: 0.56rem;
+  letter-spacing: 0.28em;
   color: var(--wine);
   text-transform: uppercase;
-  margin-bottom: 1.2rem;
-  padding-bottom: 0.6rem;
-  border-bottom: 1.5px solid var(--wine);
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
+  white-space: nowrap;
 }
 
-.cvDivider {
-  display: flex;
-  align-items: center;
-  gap: 0.8rem;
-  margin: 0.2rem 0 1.2rem;
-}
-
-.cvDivider::before,
-.cvDivider::after {
-  content: '';
+.cvSectionLine {
   flex: 1;
   height: 1px;
   background: var(--border);
-}
-
-.cvDividerOrnament {
-  font-size: 0.6rem;
-  color: var(--wine);
-  opacity: 0.5;
 }

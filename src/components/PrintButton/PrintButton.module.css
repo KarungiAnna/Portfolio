@@ -1,0 +1,20 @@
+/* Matches the existing .actionBtn style in cv.module.css */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.2rem;
+  font-family: var(--ff-label);
+  font-size: 0.58rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  border: 1.5px solid var(--green);
+  background: var(--green);
+  color: var(--cream);
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.btn:hover {
+  background: var(--green-lt);
+}

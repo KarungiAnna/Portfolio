@@ -20,16 +20,21 @@ export default function CVExperienceItem({
   return (
     <div className={styles.expItem}>
       <div className={styles.expHeader}>
-        <div className={styles.expRole}>{role}</div>
-        <div className={styles.expDuration}>{duration}</div>
-      </div>
-      <div className={styles.expCompany}>
-        {companyUrl ? (
-          <a href={companyUrl} target="_blank" rel="noreferrer">{companyName}</a>
-        ) : (
-          <strong>{companyName}</strong>
-        )}
-        {' '}— {companyDescription}
+        <div className={styles.expMeta}>
+          <div className={styles.expRole}>{role}</div>
+          <div className={styles.expDuration}>{duration}</div>
+        </div>
+        <div className={styles.expCompanyRow}>
+          {companyUrl ? (
+            <a href={companyUrl} target="_blank" rel="noopener noreferrer" className={styles.expCompanyName}>
+              {companyName}
+            </a>
+          ) : (
+            <span className={styles.expCompanyName}>{companyName}</span>
+          )}
+          <span className={styles.expDivot}></span>
+          <span className={styles.expCompanyDesc}>{companyDescription}</span>
+        </div>
       </div>
       <ul className={styles.expBullets}>
         {bullets.map((bullet, idx) => (

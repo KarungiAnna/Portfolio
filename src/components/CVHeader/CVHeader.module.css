@@ -1,10 +1,10 @@
 .cvHeader {
   background: var(--green);
-  padding: 3rem 3.5rem 2.5rem;
+  padding: 3.2rem 4rem 3rem;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2.5rem;
-  align-items: start;
+  grid-template-columns: 1fr auto;
+  gap: 4rem;
+  align-items: center;
   position: relative;
   overflow: hidden;
 }
@@ -12,153 +12,108 @@
 .cvHeader::before {
   content: '';
   position: absolute;
-  top: -100px;
-  right: -100px;
-  width: 300px;
-  height: 300px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(107, 37, 55, 0.2) 0%, transparent 70%);
+  inset: 0;
+  background: repeating-linear-gradient(
+    -45deg, transparent, transparent 40px,
+    rgba(255,255,255,0.012) 40px, rgba(255,255,255,0.012) 41px
+  );
   pointer-events: none;
 }
 
-.cvPhoto {
-  width: 110px;
-  height: 110px;
-  border: 2px solid var(--gold);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: rgba(244, 239, 230, 0.3);
-  flex-shrink: 0;
-  background: rgba(255, 255, 255, 0.05);
-  position: relative;
-}
-
-.cvPhotoLabel {
+.cvHeader::after {
+  content: '';
   position: absolute;
-  bottom: -1.2rem;
-  left: 50%;
-  transform: translateX(-50%);
-  font-family: var(--ff-label);
-  font-size: 0.45rem;
-  letter-spacing: 0.12em;
-  color: rgba(244, 239, 230, 0.3);
-  text-transform: uppercase;
-  white-space: nowrap;
+  bottom: -40px; right: -40px;
+  width: 220px; height: 220px;
+  background: radial-gradient(circle, rgba(107,37,55,0.2) 0%, transparent 70%);
+  pointer-events: none;
 }
 
 .cvNameBlock {
-  padding-top: 0.3rem;
   position: relative;
-  z-index: 2;
-}
-
-.cvRole {
-  font-family: var(--ff-label);
-  font-size: 0.6rem;
-  letter-spacing: 0.22em;
-  color: var(--gold);
-  text-transform: uppercase;
-  margin-bottom: 0.5rem;
+  z-index: 1;
 }
 
 .cvName {
-  font-family: var(--ff-display);
-  font-size: 3rem;
-  font-weight: 300;
-  color: var(--cream);
-  line-height: 1;
-  letter-spacing: -0.01em;
-}
-
-.cvName em {
-  font-style: italic;
-  color: rgba(244, 239, 230, 0.7);
-}
-
-.cvTagline {
-  margin-top: 0.8rem;
-  font-size: 0.85rem;
-  color: rgba(244, 239, 230, 0.6);
-  font-weight: 300;
-  line-height: 1.6;
-  max-width: 380px;
-}
-
-.cvSocials {
-  display: flex;
-  gap: 0.5rem;
-  margin-top: 1rem;
-}
-
-.cvSocialPill {
-  display: flex;
-  align-items: center;
-  gap: 0.35rem;
-  padding: 0.3rem 0.7rem;
-  border: 1px solid rgba(184, 146, 58, 0.35);
-  color: rgba(244, 239, 230, 0.6);
-  text-decoration: none;
   font-family: var(--ff-label);
-  font-size: 0.5rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  transition: all 0.2s ease;
+  font-size: 2.8rem;
+  font-weight: 400;
+  color: var(--cream);
+  line-height: 1.05;
+  letter-spacing: 0.04em;
 }
 
-.cvSocialPill:hover {
-  border-color: var(--gold);
+.cvRole {
+  margin-top: 0.7rem;
+  font-family: var(--ff-label);
+  font-size: 0.62rem;
+  font-weight: 400;
+  letter-spacing: 0.3em;
+  color: rgba(244,239,230,0.55);
+  text-transform: uppercase;
+}
+
+.cvPortfolioLink {
+  display: inline-block;
+  margin-top: 1rem;
+  font-family: var(--ff-body);
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  text-transform: none;
   color: var(--gold);
+  text-decoration: none;
+  opacity: 0.85;
+  transition: opacity 0.2s;
+}
+
+.cvPortfolioLink:hover {
+  opacity: 1;
 }
 
 .cvContactBlock {
   display: flex;
   flex-direction: column;
-  gap: 0.6rem;
+  gap: 0.65rem;
   align-items: flex-end;
-  padding-top: 0.3rem;
-  flex-shrink: 0;
   position: relative;
-  z-index: 2;
+  z-index: 1;
 }
 
 .cvContactItem {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  font-size: 0.78rem;
-  color: rgba(244, 239, 230, 0.65);
+  font-family: var(--ff-body);
+  font-size: 0.8rem;
+  font-weight: 300;
+  color: rgba(244,239,230,0.65);
   text-decoration: none;
-  transition: color 0.2s ease;
+  transition: color 0.2s;
 }
 
 .cvContactItem:hover {
   color: var(--gold);
 }
 
-.icon {
-  font-size: 0.65rem;
+.ciIcon {
+  font-size: 0.62rem;
   color: var(--gold);
-  opacity: 0.8;
+  opacity: 0.75;
+  flex-shrink: 0;
 }
 
 @media (max-width: 768px) {
   .cvHeader {
     grid-template-columns: 1fr;
-    text-align: center;
-    gap: 1.5rem;
     padding: 2.5rem 2rem;
-  }
-  
-  .cvPhoto {
-    margin: 0 auto;
+    gap: 2rem;
   }
   
   .cvContactBlock {
-    align-items: center;
+    align-items: flex-start;
   }
   
-  .cvSocials {
-    justify-content: center;
+  .cvName {
+    font-size: 2.2rem;
   }
 }
