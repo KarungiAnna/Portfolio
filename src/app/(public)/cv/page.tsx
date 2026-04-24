@@ -206,9 +206,9 @@ export default async function CVPage() {
         </div>
 
         <footer className={styles.cvFooter}>
-          <p>Curriculum Vitae — 2026</p>
+          <p>© 2026 Karungi Anna. All rights reserved.</p>
           <span className={styles.footerName}>Karungi Anna</span>
-          <p>annakarungi15@gmail.com · karungi-anna.vercel.app</p>
+          <p>Designed &amp; Built with ♥</p>
         </footer>
       </div>
     </div>
