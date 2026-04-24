@@ -7,6 +7,7 @@ export const sessionOptions = {
   cookieOptions: {
     // secure: true should be used in production (HTTPS), but can be false in dev
     secure: process.env.NODE_ENV === 'production',
+    maxAge: 60 * 60 * 24, // 24 hours
   },
 };
 
