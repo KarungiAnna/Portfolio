@@ -18,7 +18,7 @@ export default function ContactSection() {
       <div className={styles.contactGrid}>
         <FadeIn className={styles.contactText}>
           <p>I help teams build scalable, intuitive products end to end.</p>
-          <p>Open to remote collaborations worldwide.</p>
+          <p>Available for on-site and remote opportunities in Kampala, as well as global remote collaborations.</p>
 
           <div className={styles.contactInfoList}>
             <a href="mailto:annakarungi15@gmail.com" className={styles.contactInfoItem}>
